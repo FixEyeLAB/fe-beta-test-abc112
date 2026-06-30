@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcomee to BETA!</title>
+    <!-- Перенаправление через 4 секунды (искусственная задержка) -->
+    <meta http-equiv="refresh" content="4; url=https://MrStelsoyni.github.io/fe-beta-test-abc112">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #0a0a12;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            flex-direction: column;
+            gap: 30px;
+            background: radial-gradient(ellipse at center, #1a0a12 0%, #0a0a12 70%);
+        }
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.05);
+            border-top: 4px solid #ff2d55;
+            border-right: 4px solid #0066ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 30px rgba(255, 45, 85, 0.15), 0 0 60px rgba(0, 102, 255, 0.1);
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .message-container {
+            text-align: center;
+            padding: 0 20px;
+        }
+        .main-message {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff2d55, #ff6b6b, #0066ff, #4d8cff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            min-height: 50px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards 0.3s, gradientShift 3s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .sub-message {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+            min-height: 24px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards 0.6s;
+        }
+        .sub-message span {
+            color: #ff2d55;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .dots {
+            display: inline-block;
+            width: 24px;
+            text-align: left;
+            color: #0066ff;
+        }
+        .progress-bar {
+            width: 300px;
+            max-width: 80%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards 0.9s;
+            box-shadow: 0 0 20px rgba(255, 45, 85, 0.1);
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff2d55, #ff6b6b, #0066ff, #4d8cff, #ff2d55);
+            background-size: 200% 100%;
+            border-radius: 3px;
+            animation: progress 3.5s ease-in-out forwards, shimmer 1.5s ease-in-out infinite;
+        }
+        @keyframes progress {
+            0% { width: 0%; }
+            10% { width: 8%; }
+            25% { width: 23%; }
+            40% { width: 45%; }
+            55% { width: 62%; }
+            70% { width: 78%; }
+            85% { width: 90%; }
+            95% { width: 97%; }
+            100% { width: 100%; }
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+        .redirect-link {
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 14px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards 1.2s;
+        }
+        .redirect-link a {
+            color: #ff2d55;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(255, 45, 85, 0.3);
+            transition: all 0.3s ease;
+        }
+        .redirect-link a:hover {
+            color: #0066ff;
+            border-bottom: 1px solid #0066ff;
+        }
+        .timer {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.2);
+            margin-top: 15px;
+            font-variant-numeric: tabular-nums;
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards 1.5s;
+        }
+        .timer span {
+            color: #ff2d55;
+            font-weight: 600;
+        }
+        .loader {
+            opacity: 0;
+            animation: spin 1s linear infinite, fadeIn 0.6s ease forwards 0s;
+        }
+        /* Декоративные элементы */
+        .glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: -1;
+        }
+        .glow-red {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 45, 85, 0.08);
+            top: -100px;
+            left: -100px;
+        }
+        .glow-blue {
+            width: 350px;
+            height: 350px;
+            background: rgba(0, 102, 255, 0.08);
+            bottom: -150px;
+            right: -150px;
+        }
+        .glow-red-2 {
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 45, 85, 0.05);
+            top: 50%;
+            right: -50px;
+            transform: translateY(-50%);
+        }
+        .glow-blue-2 {
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 102, 255, 0.05);
+            bottom: 20%;
+            left: -50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Декоративные свечения -->
+    <div class="glow glow-red"></div>
+    <div class="glow glow-blue"></div>
+    <div class="glow glow-red-2"></div>
+    <div class="glow glow-blue-2"></div>
+
+    <div class="loader"></div>
+    <div class="message-container">
+        <div class="main-message" id="mainMessage">Загрузка сайта</div>
+        <div class="sub-message" id="subMessage">
+            Пожалуйста, подождите<span class="dots" id="dots">...</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+    <div class="redirect-link">
+        Не перенаправляет? <a href="https://MrStelsoyni.github.io/e-beta-test-abc112">Нажмите сюда</a>
+    </div>
+    <div class="timer" id="timer">Перенаправление через <span>4</span> секунды</div>
+
+    <script>
+        // Список случайных сообщений
+        const messages = [
+            { main: 'Загрузка сайта', sub: 'Пожалуйста, подождите' },
+            { main: 'Загрузка ассетов', sub: 'Подготовка ресурсов' },
+            { main: 'Подключение к серверу', sub: 'Установка защищённого соединения' },
+            { main: 'Инициализация', sub: 'Настройка окружения' },
+            { main: 'Сборка страницы', sub: 'Компиляция компонентов' },
+            { main: 'Загрузка данных', sub: 'Получение информации с сервера' },
+            { main: 'Проверка целостности', sub: 'Верификация файлов' },
+            { main: 'Оптимизация', sub: 'Настройка производительности' },
+            { main: 'Загрузка медиа', sub: 'Подготовка изображений и видео' },
+            { main: 'Синхронизация', sub: 'Обмен данными с облаком' }
+        ];
+
+        // Выбираем случайное сообщение
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        const selected = messages[randomIndex];
+
+        // Обновляем текст на странице
+        document.getElementById('mainMessage').textContent = selected.main;
+        document.getElementById('subMessage').innerHTML = 
+            selected.sub + ' <span class="dots" id="dots">...</span>';
+
+        // Анимация точек (троеточия)
+        let dotCount = 0;
+        const dotsElement = document.getElementById('dots');
+        const dotInterval = setInterval(() => {
+            dotCount = (dotCount % 3) + 1;
+            dotsElement.textContent = '.'.repeat(dotCount) + ' '.repeat(3 - dotCount);
+        }, 500);
+
+        // Таймер обратного отсчёта
+        let seconds = 4;
+        const timerElement = document.getElementById('timer');
+        const countdown = setInterval(() => {
+            seconds--;
+            if (seconds > 0) {
+                timerElement.innerHTML = `Перенаправление через <span>${seconds}</span> секунд${seconds === 1 ? 'у' : 'ы'}`;
+            } else {
+                clearInterval(countdown);
+                timerElement.innerHTML = 'Перенаправление...';
+            }
+        }, 1000);
+
+        // Дублируем перенаправление через JS (на случай, если meta не сработает)
+        setTimeout(() => {
+            clearInterval(dotInterval);
+            clearInterval(countdown);
+            window.location.href = "https://MrStelsoyni.github.io/e-beta-test-abc112";
+        }, 4000);
+
+        // Прогресс-бар синхронизирован с таймером (дополнительная визуализация)
+        const progressFill = document.getElementById('progressFill');
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            progress += 0.5;
+            if (progress >= 100) {
+                clearInterval(progressInterval);
+            }
+        }, 20);
+    </script>
+</body>
+</html>
